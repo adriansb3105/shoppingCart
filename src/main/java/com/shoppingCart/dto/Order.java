@@ -1,99 +1,98 @@
 package com.shoppingCart.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
-	
-private List<OrderDetail> orderDetails;
-private  OrderStatus orderStatus;
-private int id;
-private String transactionId;
-private Date date, shipDate;
-private int  trackingNumber;
-private float totalvalue;
 
-public Order() {
-	super();
-	// TODO Auto-generated constructor stub
-}
+	private List<OrderDetail> orderDetails;
+	private OrderStatus orderStatus;
+	private int id;
+	private String transactionId;
+	private Date date, shipDate;
+	private int trackingNumber;
+	private float totalvalue;
 
-public Order(List<OrderDetail> orderDetails, OrderStatus orderStatus, int id, String transactionId, Date date,
-		Date shipDate, int trackingNumber, float totalvalue) {
-	super();
-	this.orderDetails = orderDetails;
-	this.orderStatus = orderStatus;
-	this.id = id;
-	this.transactionId = transactionId;
-	this.date = date;
-	this.shipDate = shipDate;
-	this.trackingNumber = trackingNumber;
-	this.totalvalue = totalvalue;
-}
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-public List<OrderDetail> getOrderDetails() {
-	return orderDetails;
-}
+	public Order(List<OrderDetail> orderDetails, OrderStatus orderStatus, int id, String transactionId, Date date,
+			Date shipDate, int trackingNumber, float totalvalue) {
+		super();
+		this.orderDetails = orderDetails;
+		this.orderStatus = orderStatus;
+		this.id = id;
+		this.transactionId = transactionId;
+		this.date = date;
+		this.shipDate = shipDate;
+		this.trackingNumber = trackingNumber;
+		this.totalvalue = totalvalue;
+	}
 
-public void setOrderDetails(List<OrderDetail> orderDetails) {
-	this.orderDetails = orderDetails;
-}
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
 
-public OrderStatus getOrderStatus() {
-	return orderStatus;
-}
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
 
-public void setOrderStatus(OrderStatus orderStatus) {
-	this.orderStatus = orderStatus;
-}
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
 
-public int getId() {
-	return id;
-}
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 
-public void setId(int id) {
-	this.id = id;
-}
+	public int getId() {
+		return id;
+	}
 
-public String getTransactionId() {
-	return transactionId;
-}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-public void setTransactionId(String transactionId) {
-	this.transactionId = transactionId;
-}
+	public String getTransactionId() {
+		return transactionId;
+	}
 
-public Date getDate() {
-	return date;
-}
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
 
-public void setDate(Date date) {
-	this.date = date;
-}
+	public Date getDate() {
+		return date;
+	}
 
-public Date getShipDate() {
-	return shipDate;
-}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-public void setShipDate(Date shipDate) {
-	this.shipDate = shipDate;
-}
+	public Date getShipDate() {
+		return shipDate;
+	}
 
-public int getTrackingNumber() {
-	return trackingNumber;
-}
+	public void setShipDate(Date shipDate) {
+		this.shipDate = shipDate;
+	}
 
-public void setTrackingNumber(int trackingNumber) {
-	this.trackingNumber = trackingNumber;
-}
+	public int getTrackingNumber() {
+		return trackingNumber;
+	}
 
-public float getTotalvalue() {
-	return totalvalue;
-}
+	public void setTrackingNumber(int trackingNumber) {
+		this.trackingNumber = trackingNumber;
+	}
 
-public void setTotalvalue(float totalvalue) {
-	this.totalvalue = totalvalue;
-}
+	public float getTotalvalue() {
+		return totalvalue;
+	}
 
+	public void setTotalvalue(float totalvalue) {
+		this.totalvalue = totalvalue;
+	}
 
 }
