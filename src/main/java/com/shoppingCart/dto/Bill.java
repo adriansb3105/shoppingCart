@@ -35,7 +35,7 @@ public class Bill {
 		this.billDate = new Date();
 		this.totalValue = 0;
 		this.orderDetails = new ArrayList<OrderDetail>();
-		this.client = new Client();
+		//this.client = new Client();
 	}
 
 	public int getOrderId() {

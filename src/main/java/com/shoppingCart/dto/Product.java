@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,8 +36,11 @@ public class Product {
 	@Column(name="price")
 	private float price;
 	
-	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-	private Inventory inventory;
+	/*
+	 * //@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL,mappedBy = "product")
+	 * //@JsonIgnore
+	 * //private Inventory inventory;
+     */
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "category_id")
@@ -59,7 +61,6 @@ public class Product {
 		this.name = "";
 		this.description = "";
 		this.price = 0;
-		this.inventory = new Inventory();
 		this.category = new Category();
 		this.productImages = new ArrayList<ProductImage>();
 		this.orderDetails = new ArrayList<OrderDetail>();
@@ -96,14 +97,6 @@ public class Product {
 
 	public void setPrice(float price) {
 		this.price = price;
-	}
-
-	public Inventory getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
 	}
 
 	public Category getCategory() {

@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -20,13 +19,14 @@ public class Inventory {
 	@Column(name="inventory_id")
 	private int inventoryId;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_id", unique=true)
-    private Product product;
-	
 	@Column(name="units")
 	private int units;
-
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id")
+    private Product product;
+	
+	
 	public Inventory() {
 		this.product = new Product();
 		this.units = 0;

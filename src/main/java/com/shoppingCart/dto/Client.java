@@ -37,11 +37,13 @@ public class Client {
     @Column(name="description")
     private String description;
 
-    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    private ShoppingCart shoppingCart;
+    /* 
+     * //@OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+     * //private ShoppingCart shoppingCart; 
+     */
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Bill> orders;
+    private List<Bill> bills;
 
     public Client() {
         this.email = "";
@@ -52,8 +54,7 @@ public class Client {
         this.postalCode = "";
         this.telefono = "";
         this.description = "";
-        this.shoppingCart = new ShoppingCart();
-        this.orders = new ArrayList<Bill>();
+        this.bills = new ArrayList<Bill>();
     }
 
     public int getUserId() {
@@ -128,19 +129,11 @@ public class Client {
         this.description = description;
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
+    public List<Bill> getBills() {
+        return bills;
     }
 
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
-
-    public List<Bill> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Bill> orders) {
-        this.orders = orders;
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
     }
 }
