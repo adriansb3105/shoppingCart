@@ -1,49 +1,85 @@
 package com.shoppingCart.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="Product")
 public class Product {
-	private int id, price;
-	private String image, description;
-	private float unitsOnStock;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="product_id")
+	private int productId;
+	
+	@Column(name="name")
+	private String name;
+	
+	@Column(name="description")
+	private String description;
+	
+	@Column(name="price")
+	private float price;
+	
+	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private Inventory inventory;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+	@JsonIgnore
 	private Category category;
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<ProductImage> productImages;
 	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<OrderDetail> orderDetails;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "products")
+	@JsonIgnore
+	private List<ShoppingCart> shoppingCarts;
+
 	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.name = "";
+		this.description = "";
+		this.price = 0;
+		this.inventory = new Inventory();
+		this.category = new Category();
+		this.productImages = new ArrayList<ProductImage>();
+		this.orderDetails = new ArrayList<OrderDetail>();
+		this.shoppingCarts = new ArrayList<ShoppingCart>();
 	}
 
-	public Product(int id, int price, String image, String description, float unitsOnStock, Category category) {
-		super();
-		this.id = id;
-		this.price = price;
-		this.image = image;
-		this.description = description;
-		this.unitsOnStock = unitsOnStock;
-		this.category = category;
+	public int getProductId() {
+		return productId;
 	}
 
-	public int getId() {
-		return id;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public String getName() {
+		return name;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -54,12 +90,20 @@ public class Product {
 		this.description = description;
 	}
 
-	public float getUnitsOnStock() {
-		return unitsOnStock;
+	public float getPrice() {
+		return price;
 	}
 
-	public void setUnitsOnStock(float unitsOnStock) {
-		this.unitsOnStock = unitsOnStock;
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 
 	public Category getCategory() {
@@ -69,8 +113,28 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
-	
-	
-	
+
+	public List<ProductImage> getProductImages() {
+		return productImages;
+	}
+
+	public void setProductImages(List<ProductImage> productImages) {
+		this.productImages = productImages;
+	}
+
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	public List<ShoppingCart> getShoppingCarts() {
+		return shoppingCarts;
+	}
+
+	public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
+		this.shoppingCarts = shoppingCarts;
+	}
 }
