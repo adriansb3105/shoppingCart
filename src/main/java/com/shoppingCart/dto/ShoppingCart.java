@@ -1,44 +1,43 @@
 package com.shoppingCart.dto;
 
-import java.sql.Date;
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Shopping_Cart")
 public class ShoppingCart {
-	private String cartGuid;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="shopping_cart_id")
+	private int shoppingCartId;
+	
+	@Column(name="quantity")
 	private int quantity;
+	
+	@Column(name="dateCreated")
+	private Date dateCreated;
+	
+	@Column(name="clientId")
+	private int clientId;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="Shopping_Cart_Product",
+	joinColumns = {@JoinColumn(name="shopping_cart_id")},
+	inverseJoinColumns = {@JoinColumn(name="product_id")})
 	private List<Product> products;
 
-	public ShoppingCart() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public ShoppingCart(String cartGuid, int quantity, List<Product> products) {
-		super();
-		this.cartGuid = cartGuid;
-		this.quantity = quantity;
-		this.products = products;
-	}
-	public String getCartGuid() {
-		return cartGuid;
-	}
-	public void setCartGuid(String cartGuid) {
-		this.cartGuid = cartGuid;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	public List<Product> getProduct() {
-		return products;
-	}
-	public List<Product> getProducts() {
-		return products;
-	}
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+	
 }

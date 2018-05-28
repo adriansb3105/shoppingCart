@@ -1,76 +1,57 @@
 package com.shoppingCart.dto;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="Product")
 public class Product {
-	private int id, price;
-	private String image, description;
-	private float unitsOnStock;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="product_id")
+	private int productId;
+	
+	@Column(name="name")
+	private String name;
+	
+	@Column(name="description")
+	private String description;
+	
+	@Column(name="price")
+	private float price;
+	
+	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private Inventory inventory;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+	@JsonIgnore
 	private Category category;
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<ProductImage> productImages;
 	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<OrderDetail> orderDetails;
 	
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Product(int id, int price, String image, String description, float unitsOnStock, Category category) {
-		super();
-		this.id = id;
-		this.price = price;
-		this.image = image;
-		this.description = description;
-		this.unitsOnStock = unitsOnStock;
-		this.category = category;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public float getUnitsOnStock() {
-		return unitsOnStock;
-	}
-
-	public void setUnitsOnStock(float unitsOnStock) {
-		this.unitsOnStock = unitsOnStock;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	
-	
-	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "products")
+	@JsonIgnore
+	private List<ShoppingCart> shoppingCarts;
 	
 }
