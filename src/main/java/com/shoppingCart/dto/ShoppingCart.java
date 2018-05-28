@@ -1,8 +1,4 @@
 package com.shoppingCart.dto;
-<<<<<<< HEAD
-import java.util.List;
-
-=======
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Shopping_Cart")
->>>>>>> b980786734e1f609c9eaec8ac2e325663e6fbdf8
 public class ShoppingCart {
 	
 	@Id
