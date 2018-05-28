@@ -18,7 +18,7 @@ public class ShoppingCart {
 	@Column(name="quantity")
 	private int quantity;
 	
-	@Column(name="dateCreated")
+	@Column(name="date_created")
 	private Date dateCreated;
 
 	@OneToOne(fetch = FetchType.LAZY)

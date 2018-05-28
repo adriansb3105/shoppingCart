@@ -9,21 +9,21 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Order")
-public class Order {
+@Table(name="Bill")
+public class Bill {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="order_id")
-	private int orderId;
+	@Column(name="bill_id")
+	private int billId;
 	
-	@Column(name="order_date")
-	private Date orderDate;
+	@Column(name="bill_date")
+	private Date billDate;
 	
 	@Column(name="total_value")
 	private float totalValue;
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
 	private List<OrderDetail> orderDetails;
 
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -31,27 +31,27 @@ public class Order {
 	@JsonIgnore
 	private Client client;
 
-	public Order() {
-		this.orderDate = new Date();
+	public Bill() {
+		this.billDate = new Date();
 		this.totalValue = 0;
 		this.orderDetails = new ArrayList<OrderDetail>();
 		this.client = new Client();
 	}
 
 	public int getOrderId() {
-		return orderId;
+		return billId;
 	}
 
 	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+		this.billId = orderId;
 	}
 
-	public Date getOrderDate() {
-		return orderDate;
+	public Date getBillDate() {
+		return billDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+	public void setBillDate(Date billDate) {
+		this.billDate = billDate;
 	}
 
 	public float getTotalValue() {

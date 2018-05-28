@@ -31,9 +31,9 @@ public class OrderDetail {
 	private int tax;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "order_id")
+	@JoinColumn(name = "bill_id")
 	@JsonIgnore
-	private Order order;
+	private Bill bill;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "product_id")
@@ -44,7 +44,7 @@ public class OrderDetail {
 		this.quantity = 0;
 		this.price = 0;
 		this.tax = 0;
-		this.order = new Order();
+		this.bill = new Bill();
 		this.product = new Product();
 	}
 
@@ -80,12 +80,12 @@ public class OrderDetail {
 		this.tax = tax;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Bill getBill() {
+		return bill;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setBill(Bill bill) {
+		this.bill = bill;
 	}
 
 	public Product getProduct() {

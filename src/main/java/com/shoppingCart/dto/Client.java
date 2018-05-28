@@ -10,8 +10,8 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="user_id")
-    private int userId;
+    @Column(name="client_id")
+    private int clientId;
 
     @Column(name="email")
     private String email;
@@ -28,7 +28,7 @@ public class Client {
     @Column(name="city")
     private String city;
 
-    @Column(name="postalCode")
+    @Column(name="postal_code")
     private String postalCode;
 
     @Column(name="telefono")
@@ -41,7 +41,7 @@ public class Client {
     private ShoppingCart shoppingCart;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    private List<Bill> orders;
 
     public Client() {
         this.email = "";
@@ -53,15 +53,15 @@ public class Client {
         this.telefono = "";
         this.description = "";
         this.shoppingCart = new ShoppingCart();
-        this.orders = new ArrayList<Order>();
+        this.orders = new ArrayList<Bill>();
     }
 
     public int getUserId() {
-        return userId;
+        return clientId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserId(int clientId) {
+        this.clientId = clientId;
     }
 
     public String getEmail() {
@@ -136,11 +136,11 @@ public class Client {
         this.shoppingCart = shoppingCart;
     }
 
-    public List<Order> getOrders() {
+    public List<Bill> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<Bill> orders) {
         this.orders = orders;
     }
 }

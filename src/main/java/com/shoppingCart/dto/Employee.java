@@ -8,8 +8,8 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="user_id")
-    private int userId;
+    @Column(name="employee_id")
+    private int employeeId;
 
     @Column(name="email")
     private String email;
@@ -38,12 +38,12 @@ public class Employee {
         this.departament = "";
     }
 
-    public int getUserId() {
-        return userId;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getEmail() {
