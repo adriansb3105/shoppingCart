@@ -1,9 +1,5 @@
 package com.shoppingCart.dto;
-
-import java.sql.Date;
-import java.util.LinkedList;
 import java.util.List;
-
 
 public class ShoppingCart {
 	private String cartGuid;
