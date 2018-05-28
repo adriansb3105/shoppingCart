@@ -1,4 +1,4 @@
-package com.shoppingCart.dto;
+/*package com.shoppingCart.dto;
 
 import javax.persistence.*;
 import java.util.List;
@@ -71,3 +71,4 @@ public class User {
 		this.password = password;
 	}
 }
+*/
