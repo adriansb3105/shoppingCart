@@ -26,5 +26,33 @@ public class Inventory {
 	
 	@Column(name="units")
 	private int units;
-	
+
+	public Inventory() {
+		this.product = new Product();
+		this.units = 0;
+	}
+
+	public int getInventoryId() {
+		return inventoryId;
+	}
+
+	public void setInventoryId(int inventoryId) {
+		this.inventoryId = inventoryId;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public int getUnits() {
+		return units;
+	}
+
+	public void setUnits(int units) {
+		this.units = units;
+	}
 }
