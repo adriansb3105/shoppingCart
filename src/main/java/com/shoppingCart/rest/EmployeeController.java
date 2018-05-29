@@ -32,4 +32,10 @@ public class EmployeeController {
 		List<Employee> employees = employeeRepository.findAll();
 		return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
 	}
+
+	@GetMapping("login_employee/{employee_code}/{email}/{password}")
+	public ResponseEntity<Employee> login(String employee_code, String email, String password){
+		Employee employee = employeeRepository.login(employee_code, email, password);
+		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
 }

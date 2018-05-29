@@ -31,8 +31,8 @@ public class Client {
     @Column(name="postal_code")
     private String postalCode;
 
-    @Column(name="telefono")
-    private String telefono;
+    @Column(name="telephone")
+    private String telephone;
 
     @Column(name="description")
     private String description;
@@ -52,7 +52,7 @@ public class Client {
         this.password = "";
         this.city = "";
         this.postalCode = "";
-        this.telefono = "";
+        this.telephone = "";
         this.description = "";
         this.bills = new ArrayList<Bill>();
     }
@@ -113,12 +113,12 @@ public class Client {
         this.postalCode = postalCode;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getDescription() {
