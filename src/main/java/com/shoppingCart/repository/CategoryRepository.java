@@ -8,4 +8,6 @@ import com.shoppingCart.dto.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	List<Category> findAll();
+	Category findById(int id);
+	Category save(Category category);
 }

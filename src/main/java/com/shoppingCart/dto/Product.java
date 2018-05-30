@@ -47,24 +47,24 @@ public class Product {
 	@JsonIgnore
 	private Category category;
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<ProductImage> productImages;
+	//@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	//private List<ProductImage> productImages;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<OrderDetail> orderDetails;
+	//@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	//private List<OrderDetail> orderDetails;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "products")
-	@JsonIgnore
-	private List<ShoppingCart> shoppingCarts;
+	//@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "products")
+	//@JsonIgnore
+	//private List<ShoppingCart> shoppingCarts;
 
 	public Product() {
 		this.name = "";
 		this.description = "";
 		this.price = 0;
 		this.category = new Category();
-		this.productImages = new ArrayList<ProductImage>();
-		this.orderDetails = new ArrayList<OrderDetail>();
-		this.shoppingCarts = new ArrayList<ShoppingCart>();
+		//this.productImages = new ArrayList<ProductImage>();
+		//this.orderDetails = new ArrayList<OrderDetail>();
+		//this.shoppingCarts = new ArrayList<ShoppingCart>();
 	}
 
 	public int getProductId() {
@@ -107,27 +107,27 @@ public class Product {
 		this.category = category;
 	}
 
-	public List<ProductImage> getProductImages() {
-		return productImages;
-	}
+	//public List<ProductImage> getProductImages() {
+	//	return productImages;
+	//}
 
-	public void setProductImages(List<ProductImage> productImages) {
-		this.productImages = productImages;
-	}
+	//public void setProductImages(List<ProductImage> productImages) {
+	//	this.productImages = productImages;
+	//}
 
-	public List<OrderDetail> getOrderDetails() {
-		return orderDetails;
-	}
+	//public List<OrderDetail> getOrderDetails() {
+	//	return orderDetails;
+	//}
 
-	public void setOrderDetails(List<OrderDetail> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
+	//public void setOrderDetails(List<OrderDetail> orderDetails) {
+	//	this.orderDetails = orderDetails;
+	//}
 
-	public List<ShoppingCart> getShoppingCarts() {
-		return shoppingCarts;
-	}
+	//public List<ShoppingCart> getShoppingCarts() {
+	//	return shoppingCarts;
+	//}
 
-	public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
-		this.shoppingCarts = shoppingCarts;
-	}
+	//public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
+	//	this.shoppingCarts = shoppingCarts;
+	//}
 }
