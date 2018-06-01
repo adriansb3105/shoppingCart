@@ -1,4 +1,4 @@
-package com.shoppingCart.repository;
+/*package com.shoppingCart.repository;
 
 import java.util.List;
 
@@ -9,3 +9,4 @@ import com.shoppingCart.dto.Inventory;
 public interface InventoryRepository extends JpaRepository<Inventory, Integer>{
 	List<Inventory> findAll();
 }
+*/

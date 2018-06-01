@@ -1,4 +1,4 @@
-package com.shoppingCart.dto;
+/*package com.shoppingCart.dto;
 
 import javax.persistence.*;
 
@@ -94,3 +94,4 @@ public class Employee {
         this.departament = departament;
     }
 }
+*/

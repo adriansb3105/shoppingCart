@@ -19,6 +19,12 @@ public class ProductController {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+	//@Autowired
+	//private CategoryRepository categoryRepository;
 	
 	@GetMapping("/")
 	public ResponseEntity<List<Product>> listAllProducts(){
@@ -32,9 +38,15 @@ public class ProductController {
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/category")
+    public ResponseEntity<Category> getCategoryByProduct(@PathVariable("id") final int id){
+        Product product = productRepository.findById(id);
+        return new ResponseEntity<Category>(categoryRepository.findById(product.getCategoryId()), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
-        productRepository.save(product);
+        product = productRepository.save(product);
         return new ResponseEntity<Product>(product, HttpStatus.CREATED);
     }
 }

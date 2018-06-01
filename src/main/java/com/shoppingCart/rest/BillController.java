@@ -1,4 +1,4 @@
-package com.shoppingCart.rest;
+/*package com.shoppingCart.rest;
 
 import java.util.List;
 
@@ -29,3 +29,4 @@ public class BillController {
 		return new ResponseEntity<List<Bill>>(bills, HttpStatus.OK);
 	}
 }
+*/

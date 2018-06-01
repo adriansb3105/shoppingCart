@@ -42,10 +42,12 @@ public class Product {
 	 * //private Inventory inventory;
      */
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "category_id")
-	@JsonIgnore
-	private Category category;
+	//@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	//@JoinColumn(name = "category_id")
+	//@JsonIgnore
+	//private Category category;
+	@Column(name="category_id")
+	private int categoryId;
 
 	//@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	//private List<ProductImage> productImages;
@@ -57,14 +59,14 @@ public class Product {
 	//@JsonIgnore
 	//private List<ShoppingCart> shoppingCarts;
 
+
 	public Product() {
-		this.name = "";
-		this.description = "";
-		this.price = 0;
-		this.category = new Category();
-		//this.productImages = new ArrayList<ProductImage>();
-		//this.orderDetails = new ArrayList<OrderDetail>();
-		//this.shoppingCarts = new ArrayList<ShoppingCart>();
+		super();
+		//this.name = "";
+		//this.description = "";
+		//this.price = 0;
+		//this.categoryId = 0;
+		//this.category = new Category();
 	}
 
 	public int getProductId() {
@@ -99,13 +101,21 @@ public class Product {
 		this.price = price;
 	}
 
-	public Category getCategory() {
-		return category;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
+
+	//public Category getCategory() {
+	//	return category;
+	//}
+
+	//public void setCategory(Category category) {
+	//	this.category = category;
+	//}
 
 	//public List<ProductImage> getProductImages() {
 	//	return productImages;

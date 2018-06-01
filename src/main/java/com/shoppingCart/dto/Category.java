@@ -1,5 +1,6 @@
 package com.shoppingCart.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,15 +24,14 @@ public class Category {
 	@Column(name="name")
 	private String name;
 
-	/*
-	* //@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-	* //private List<Product> products;
-	*/
+	//@OneToMany(mappedBy = "category_id", cascade = CascadeType.ALL)
+	//private List<Product> products;
+
 
 	public Category() {
 		super();
-		this.categoryId = 0;
-		this.name = "";
+	//	this.name = "";
+	//	this.products = new ArrayList<Product>();
 	}
 
 	public int getCategoryId() {
@@ -49,5 +49,13 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	//public List<Product> getProducts() {
+	//	return products;
+	//}
+
+	//public void setProducts(List<Product> products) {
+	//	this.products = products;
+	//}
 
 }

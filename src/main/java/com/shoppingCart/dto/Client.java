@@ -1,4 +1,4 @@
-package com.shoppingCart.dto;
+/*package com.shoppingCart.dto;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,10 +37,10 @@ public class Client {
     @Column(name="description")
     private String description;
 
-    /* 
+
      * //@OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
      * //private ShoppingCart shoppingCart; 
-     */
+     *
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Bill> bills;
@@ -137,3 +137,4 @@ public class Client {
         this.bills = bills;
     }
 }
+*/

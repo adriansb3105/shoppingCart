@@ -1,4 +1,4 @@
-package com.shoppingCart.dto;
+/*package com.shoppingCart.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -96,3 +96,4 @@ public class OrderDetail {
 		this.product = product;
 	}
 }
+*/

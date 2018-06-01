@@ -1,4 +1,4 @@
-package com.shoppingCart.repository;
+/*package com.shoppingCart.repository;
 
 import java.util.List;
 
@@ -13,3 +13,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	@Query(value = "sp_login_employee ?1, ?2, ?3", nativeQuery = true)
 	Employee login(String employee_code, String email, String password);
 }
+*/

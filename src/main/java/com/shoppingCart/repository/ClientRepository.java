@@ -1,4 +1,4 @@
-package com.shoppingCart.repository;
+/*package com.shoppingCart.repository;
 
 import java.util.List;
 
@@ -15,3 +15,4 @@ public interface ClientRepository extends JpaRepository<Client, Integer>{
 	@Query(value = "sp_login_client ?1, ?2", nativeQuery = true)
 	Client login(String email, String password);
 }
+*/

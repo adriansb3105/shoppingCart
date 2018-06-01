@@ -1,4 +1,4 @@
-package com.shoppingCart.dto;
+/*package com.shoppingCart.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -78,3 +78,4 @@ public class Bill {
 		this.client = client;
 	}
 }
+*/

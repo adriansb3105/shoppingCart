@@ -9,4 +9,5 @@ import com.shoppingCart.dto.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 	List<Product> findAll();
 	Product findById(int id);
+	Product save(Product product);
 }

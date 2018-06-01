@@ -1,4 +1,4 @@
-package com.shoppingCart.dto;
+/*package com.shoppingCart.dto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,3 +78,4 @@ public class ShoppingCart {
 		this.products = products;
 	}
 }
+*/
