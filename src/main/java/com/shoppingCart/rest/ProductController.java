@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.shoppingCart.dto.Category;
 import com.shoppingCart.dto.Product;
-import com.shoppingCart.repository.CategoryRepository;
 import com.shoppingCart.repository.ProductRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -20,12 +19,6 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-	//@Autowired
-	//private CategoryRepository categoryRepository;
-	
 	@GetMapping("/")
 	public ResponseEntity<List<Product>> listAllProducts(){
 		List<Product> products = productRepository.findAll();
@@ -41,7 +34,7 @@ public class ProductController {
     @GetMapping("/{id}/category")
     public ResponseEntity<Category> getCategoryByProduct(@PathVariable("id") final int id){
         Product product = productRepository.findById(id);
-        return new ResponseEntity<Category>(categoryRepository.findById(product.getCategoryId()), HttpStatus.OK);
+        return new ResponseEntity<Category>(product.getCategory(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)

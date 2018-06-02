@@ -1,22 +1,13 @@
 package com.shoppingCart.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Product")
@@ -35,38 +26,13 @@ public class Product {
 	
 	@Column(name="price")
 	private float price;
-	
-	/*
-	 * //@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL,mappedBy = "product")
-	 * //@JsonIgnore
-	 * //private Inventory inventory;
-     */
-	
-	//@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
-	//@JoinColumn(name = "category_id")
-	//@JsonIgnore
-	//private Category category;
-	@Column(name="category_id")
-	private int categoryId;
 
-	//@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	//private List<ProductImage> productImages;
-	
-	//@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	//private List<OrderDetail> orderDetails;
-	
-	//@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "products")
-	//@JsonIgnore
-	//private List<ShoppingCart> shoppingCarts;
-
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 
 	public Product() {
 		super();
-		//this.name = "";
-		//this.description = "";
-		//this.price = 0;
-		//this.categoryId = 0;
-		//this.category = new Category();
 	}
 
 	public int getProductId() {
@@ -101,43 +67,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
-
-	//public Category getCategory() {
-	//	return category;
-	//}
-
-	//public void setCategory(Category category) {
-	//	this.category = category;
-	//}
-
-	//public List<ProductImage> getProductImages() {
-	//	return productImages;
-	//}
-
-	//public void setProductImages(List<ProductImage> productImages) {
-	//	this.productImages = productImages;
-	//}
-
-	//public List<OrderDetail> getOrderDetails() {
-	//	return orderDetails;
-	//}
-
-	//public void setOrderDetails(List<OrderDetail> orderDetails) {
-	//	this.orderDetails = orderDetails;
-	//}
-
-	//public List<ShoppingCart> getShoppingCarts() {
-	//	return shoppingCarts;
-	//}
-
-	//public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
-	//	this.shoppingCarts = shoppingCarts;
-	//}
 }

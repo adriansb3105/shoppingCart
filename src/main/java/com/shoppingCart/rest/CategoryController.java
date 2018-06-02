@@ -2,7 +2,6 @@ package com.shoppingCart.rest;
 
 import java.util.List;
 
-import com.shoppingCart.dto.Product;
 import com.shoppingCart.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,9 +19,6 @@ public class CategoryController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	@Autowired
-	private ProductRepository productRepository;
-	
 	@GetMapping("/")
 	public ResponseEntity<List<Category>> listAllCategories(){
 		List<Category> categories = categoryRepository.findAll();
