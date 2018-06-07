@@ -1,4 +1,4 @@
-/*package com.shoppingCart.dto;
+package com.shoppingCart.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Product_Image")
-public class ProductImage {
+public class ProductImage  implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,16 +22,13 @@ public class ProductImage {
 	
 	@Column(name="url")
 	private String url;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "product_id")
-	@JsonIgnore
-	private Product product;
+
+    @ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
 	public ProductImage() {
 		super();
-		this.productImageId = 0;
-		this.url = "";
 		this.product = new Product();
 	}
 
@@ -61,4 +57,3 @@ public class ProductImage {
 	}
 	
 }
-*/

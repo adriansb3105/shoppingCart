@@ -36,4 +36,10 @@ public class CategoryController {
 		category = categoryRepository.save(category);
 		return new ResponseEntity<Category>(category, HttpStatus.CREATED);
 	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Category> deleteProduct(@PathVariable("id") final int id){
+		categoryRepository.deleteById(id);
+		return new ResponseEntity<Category>(HttpStatus.NO_CONTENT);
+	}
 }

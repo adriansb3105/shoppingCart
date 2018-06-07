@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.shoppingCart.dto.Category;
 import com.shoppingCart.dto.Product;
 import com.shoppingCart.repository.ProductRepository;
 
@@ -31,15 +30,15 @@ public class ProductController {
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/category")
-    public ResponseEntity<Category> getCategoryByProduct(@PathVariable("id") final int id){
-        Product product = productRepository.findById(id);
-        return new ResponseEntity<Category>(product.getCategory(), HttpStatus.OK);
-    }
-
     @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
         product = productRepository.save(product);
         return new ResponseEntity<Product>(product, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable("id") final int id){
+        productRepository.deleteById(id);
+        return new ResponseEntity<Product>(HttpStatus.NO_CONTENT);
     }
 }

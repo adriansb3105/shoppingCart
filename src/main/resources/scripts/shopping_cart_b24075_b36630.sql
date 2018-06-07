@@ -63,7 +63,7 @@ create table Shopping_Cart_Product(	shopping_cart_id int IDENTITY(1, 1) not null
 									constraint FK_Cart_Product_Client Foreign Key(shopping_cart_id) references Shopping_Cart(shopping_cart_id),
 									constraint FK_Cart_Product_Product Foreign Key(product_id) references Product(product_id));
 
-
+GO;
 
 ---------------------------------------------------------------------------------------
 CREATE PROCEDURE sp_login_employee @employee_code varchar(255), @email varchar(255), @password varchar(255)
@@ -71,6 +71,7 @@ AS
 BEGIN
 	select employee_id, email, first_name, last_name, password, employee_code, departament from Employee where employee_code=@employee_code AND email=@email AND password=@password ;
 END
+GO;
 ---------------------------------------------------------------------------------------
 
 CREATE PROCEDURE sp_login_client @email varchar(255), @password varchar(255)
@@ -78,6 +79,7 @@ AS
 BEGIN
 	select client_id, email, first_name, last_name, password, city, postal_code, telephone, description from Client where email=@email AND password=@password;
 END
+GO;
 ---------------------------------------------------------------------------------------
 
 

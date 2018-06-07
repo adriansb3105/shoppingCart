@@ -1,11 +1,16 @@
 package com.shoppingCart.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Category")
-public class Category {
-	
+public class Category implements Serializable{
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="category_id")
@@ -14,8 +19,13 @@ public class Category {
 	@Column(name="name")
 	private String name;
 
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+	private List<Product> products;
+
 	public Category() {
 		super();
+		this.products = new ArrayList<Product>();
 	}
 
 	public int getCategoryId() {
@@ -34,4 +44,11 @@ public class Category {
 		this.name = name;
 	}
 
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
 }

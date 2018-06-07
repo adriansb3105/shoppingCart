@@ -1,18 +1,13 @@
-/*package com.shoppingCart.rest;
+package com.shoppingCart.rest;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.shoppingCart.dto.Category;
 import com.shoppingCart.dto.ProductImage;
-import com.shoppingCart.repository.CategoryRepository;
 import com.shoppingCart.repository.ProductImageRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -28,5 +23,22 @@ public class ProductImageController {
 		List<ProductImage> productImages = productImageRepository.findAll();
 		return new ResponseEntity<List<ProductImage>>(productImages, HttpStatus.OK);
 	}
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductImage> getProductImageById(@PathVariable("id") final int id){
+        ProductImage productImage = productImageRepository.findById(id);
+        return new ResponseEntity<ProductImage>(productImage, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductImage> createProductImage(@RequestBody ProductImage productImage){
+        productImage = productImageRepository.save(productImage);
+        return new ResponseEntity<ProductImage>(productImage, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProductImage> deleteProductImage(@PathVariable("id") final int id){
+        productImageRepository.deleteById(id);
+        return new ResponseEntity<ProductImage>(HttpStatus.NO_CONTENT);
+    }
 }
-*/
