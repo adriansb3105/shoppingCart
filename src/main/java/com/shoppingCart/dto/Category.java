@@ -19,7 +19,10 @@ public class Category implements Serializable{
 	@Column(name="name")
 	private String name;
 
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Column(name="deleted")
+	private boolean deleted;
+
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JsonIgnore
 	private List<Product> products;
 
@@ -42,6 +45,14 @@ public class Category implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public List<Product> getProducts() {

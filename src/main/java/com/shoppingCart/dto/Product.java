@@ -25,11 +25,14 @@ public class Product implements Serializable{
 	@Column(name="price")
 	private float price;
 
+	@Column(name="deleted")
+	private boolean deleted;
+
 	@ManyToOne(fetch= FetchType.EAGER)
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JsonIgnore
 	private List<ProductImage> productImages;
 
@@ -69,6 +72,14 @@ public class Product implements Serializable{
 
 	public void setPrice(float price) {
 		this.price = price;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public Category getCategory() {

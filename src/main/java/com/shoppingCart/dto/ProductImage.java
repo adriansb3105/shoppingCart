@@ -27,6 +27,9 @@ public class ProductImage  implements Serializable {
     @JoinColumn(name = "product_id")
     private Product product;
 
+	@Column(name="deleted")
+	private boolean deleted;
+
 	public ProductImage() {
 		super();
 		this.product = new Product();
@@ -55,5 +58,12 @@ public class ProductImage  implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 }

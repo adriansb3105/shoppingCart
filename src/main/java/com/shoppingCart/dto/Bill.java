@@ -1,7 +1,8 @@
-/*package com.shoppingCart.dto;
+package com.shoppingCart.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Bill")
-public class Bill {
+public class Bill implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,19 +24,30 @@ public class Bill {
 	@Column(name="total_value")
 	private float totalValue;
 
-	@OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+	@Column(name="deleted")
+	private boolean deleted;
+
+	@OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonIgnore
 	private List<OrderDetail> orderDetails;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "client_id")
-	@JsonIgnore
-	private Client client;
+	//@ManyToOne(fetch=FetchType.EAGER)
+	//@JoinColumn(name = "client_id")
+	//@JsonIgnore
+	//private Client client;
 
 	public Bill() {
 		this.billDate = new Date();
-		this.totalValue = 0;
 		this.orderDetails = new ArrayList<OrderDetail>();
 		//this.client = new Client();
+	}
+
+	public int getBillId() {
+		return billId;
+	}
+
+	public void setBillId(int billId) {
+		this.billId = billId;
 	}
 
 	public int getOrderId() {
@@ -70,12 +82,19 @@ public class Bill {
 		this.orderDetails = orderDetails;
 	}
 
-	public Client getClient() {
-		return client;
+	public boolean isDeleted() {
+		return deleted;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
+
+	//public Client getClient() {
+	//	return client;
+	//}
+
+	//public void setClient(Client client) {
+	//	this.client = client;
+	//}
 }
-*/

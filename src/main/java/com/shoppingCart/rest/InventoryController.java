@@ -1,18 +1,13 @@
-/*package com.shoppingCart.rest;
+package com.shoppingCart.rest;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.shoppingCart.dto.Category;
 import com.shoppingCart.dto.Inventory;
-import com.shoppingCart.repository.CategoryRepository;
 import com.shoppingCart.repository.InventoryRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -26,7 +21,44 @@ public class InventoryController {
 	@GetMapping("/")
 	public ResponseEntity<List<Inventory>> listAllInventories(){
 		List<Inventory> inventories = inventoryRepository.findAll();
+        for(Inventory i : inventories) {
+            if(i.isDeleted()){
+                inventories.remove(i);
+            }
+        }
 		return new ResponseEntity<List<Inventory>>(inventories, HttpStatus.OK);
 	}
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Inventory> getInventoryById(@PathVariable("id") final int id){
+        Inventory inventory = inventoryRepository.findById(id);
+        if(inventory.isDeleted()){
+            return new ResponseEntity<Inventory>(new Inventory(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Inventory>(inventory, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Inventory> createInventory(@RequestBody Inventory inventory){
+        inventory = inventoryRepository.save(inventory);
+        return new ResponseEntity<Inventory>(inventory, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> buyUnits(@PathVariable("quantity") final int quantity, @PathVariable("id") final int id){
+        Boolean buyUnits = inventoryRepository.buyUnits(quantity, id);
+        return new ResponseEntity<Boolean>(buyUnits, HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> addUnits(@PathVariable("quantity") final int quantity, @PathVariable("id") final int id){
+        Boolean addUnits = inventoryRepository.addUnits(quantity, id);
+        return new ResponseEntity<Boolean>(addUnits, HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Inventory> deleteInventory(@PathVariable("id") final int id){
+        inventoryRepository.delete(id);
+        return new ResponseEntity<Inventory>(HttpStatus.NO_CONTENT);
+    }
 }
-*/

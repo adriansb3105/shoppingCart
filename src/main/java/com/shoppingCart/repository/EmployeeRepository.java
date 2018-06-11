@@ -1,4 +1,4 @@
-/*package com.shoppingCart.repository;
+package com.shoppingCart.repository;
 
 import java.util.List;
 
@@ -10,7 +10,12 @@ import org.springframework.data.jpa.repository.Query;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	List<Employee> findAll();
 
+	Employee findById(int id);
+	Employee save(Employee employee);
+
 	@Query(value = "sp_login_employee ?1, ?2, ?3", nativeQuery = true)
 	Employee login(String employee_code, String email, String password);
+
+	@Query(value = "update Employee set deleted = 1 where employee_id = ?1", nativeQuery = true)
+	boolean delete(int id);
 }
-*/

@@ -1,18 +1,11 @@
-/*package com.shoppingCart.dto;
+package com.shoppingCart.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Inventory")
-public class Inventory {
+public class Inventory implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,14 +15,15 @@ public class Inventory {
 	@Column(name="units")
 	private int units;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "product_id")
     private Product product;
-	
-	
+
+    @Column(name="deleted")
+    private boolean deleted;
+
 	public Inventory() {
 		this.product = new Product();
-		this.units = 0;
 	}
 
 	public int getInventoryId() {
@@ -55,5 +49,12 @@ public class Inventory {
 	public void setUnits(int units) {
 		this.units = units;
 	}
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
-*/

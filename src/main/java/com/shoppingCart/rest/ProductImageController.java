@@ -21,12 +21,20 @@ public class ProductImageController {
 	@GetMapping("/")
 	public ResponseEntity<List<ProductImage>> listAllProductImages(){
 		List<ProductImage> productImages = productImageRepository.findAll();
+        for(ProductImage pi : productImages) {
+            if(pi.isDeleted()){
+                productImages.remove(pi);
+            }
+        }
 		return new ResponseEntity<List<ProductImage>>(productImages, HttpStatus.OK);
 	}
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductImage> getProductImageById(@PathVariable("id") final int id){
         ProductImage productImage = productImageRepository.findById(id);
+        if(productImage.isDeleted()){
+            return new ResponseEntity<ProductImage>(new ProductImage(), HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<ProductImage>(productImage, HttpStatus.OK);
     }
 
@@ -38,7 +46,7 @@ public class ProductImageController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ProductImage> deleteProductImage(@PathVariable("id") final int id){
-        productImageRepository.deleteById(id);
+        productImageRepository.delete(id);
         return new ResponseEntity<ProductImage>(HttpStatus.NO_CONTENT);
     }
 }

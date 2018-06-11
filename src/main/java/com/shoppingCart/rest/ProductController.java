@@ -2,6 +2,8 @@ package com.shoppingCart.rest;
 
 import java.util.List;
 
+import com.shoppingCart.dto.Inventory;
+import com.shoppingCart.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,20 @@ public class ProductController {
 	@GetMapping("/")
 	public ResponseEntity<List<Product>> listAllProducts(){
 		List<Product> products = productRepository.findAll();
+        for(Product p : products) {
+            if(p.isDeleted()){
+                products.remove(p);
+            }
+        }
 		return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
 	}
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") final int id){
         Product product = productRepository.findById(id);
+        if(product.isDeleted()){
+            return new ResponseEntity<Product>(new Product(), HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
@@ -38,7 +48,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") final int id){
-        productRepository.deleteById(id);
+        productRepository.delete(id);
         return new ResponseEntity<Product>(HttpStatus.NO_CONTENT);
     }
 }

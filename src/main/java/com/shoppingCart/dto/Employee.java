@@ -1,10 +1,11 @@
-/*package com.shoppingCart.dto;
+package com.shoppingCart.dto;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Employee")
-public class Employee {
+public class Employee implements Serializable{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -29,13 +30,11 @@ public class Employee {
     @Column(name="departament")
     private String departament;
 
+    @Column(name="deleted")
+    private boolean deleted;
+
     public Employee() {
-        this.email = "";
-        this.firstName = "";
-        this.lastName = "";
-        this.password = "";
-        this.employeeCode = "";
-        this.departament = "";
+        super();
     }
 
     public int getEmployeeId() {
@@ -93,5 +92,12 @@ public class Employee {
     public void setDepartament(String departament) {
         this.departament = departament;
     }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
-*/

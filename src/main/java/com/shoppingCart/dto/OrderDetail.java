@@ -1,4 +1,4 @@
-/*package com.shoppingCart.dto;
+package com.shoppingCart.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +12,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="Order_Detail")
-public class OrderDetail {
+public class OrderDetail implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -29,21 +31,20 @@ public class OrderDetail {
 	
 	@Column(name="tax")
 	private int tax;
+
+	@Column(name="deleted")
+	private boolean deleted;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "bill_id")
-	@JsonIgnore
 	private Bill bill;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id")
-	@JsonIgnore
 	private Product product;
 
 	public OrderDetail() {
-		this.quantity = 0;
-		this.price = 0;
-		this.tax = 0;
+		super();
 		this.bill = new Bill();
 		this.product = new Product();
 	}
@@ -88,6 +89,15 @@ public class OrderDetail {
 		this.bill = bill;
 	}
 
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public Product getProduct() {
 		return product;
 	}
@@ -96,4 +106,3 @@ public class OrderDetail {
 		this.product = product;
 	}
 }
-*/

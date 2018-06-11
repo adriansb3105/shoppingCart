@@ -1,5 +1,6 @@
-/*package com.shoppingCart.dto;
+package com.shoppingCart.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Shopping_Cart")
-public class ShoppingCart {
+public class ShoppingCart implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +22,22 @@ public class ShoppingCart {
 	@Column(name="date_created")
 	private Date dateCreated;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "client_id")
-	private Client client;
+    @Column(name="deleted")
+    private boolean deleted;
+
+	//@OneToOne(fetch = FetchType.LAZY)
+	//@JoinColumn(name = "client_id")
+	//private Client client;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="Shopping_Cart_Product",
 	joinColumns = {@JoinColumn(name="shopping_cart_id")},
 	inverseJoinColumns = {@JoinColumn(name="product_id")})
 	private List<Product> products;
 
 	public ShoppingCart() {
-		this.quantity = 0;
 		this.dateCreated = new Date();
-		this.client = new Client();
+	//	this.client = new Client();
 		this.products = new ArrayList<>();
 	}
 
@@ -62,13 +65,13 @@ public class ShoppingCart {
 		this.dateCreated = dateCreated;
 	}
 
-	public Client getClient() {
-		return client;
-	}
+	//public Client getClient() {
+	//	return client;
+	//}
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+	//public void setClient(Client client) {
+	//	this.client = client;
+	//}
 
 	public List<Product> getProducts() {
 		return products;
@@ -77,5 +80,12 @@ public class ShoppingCart {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
-*/
