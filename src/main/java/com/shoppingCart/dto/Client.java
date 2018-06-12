@@ -1,12 +1,15 @@
-/*package com.shoppingCart.dto;
+package com.shoppingCart.dto;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="Client")
-public class Client {
+public class Client implements Serializable{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -37,23 +40,15 @@ public class Client {
     @Column(name="description")
     private String description;
 
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
+    @JsonIgnore
+    private ShoppingCart shoppingCart;
 
-     * //@OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-     * //private ShoppingCart shoppingCart; 
-     *
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonIgnore
     private List<Bill> bills;
 
     public Client() {
-        this.email = "";
-        this.firstName = "";
-        this.lastName = "";
-        this.password = "";
-        this.city = "";
-        this.postalCode = "";
-        this.telephone = "";
-        this.description = "";
         this.bills = new ArrayList<Bill>();
     }
 
@@ -137,4 +132,3 @@ public class Client {
         this.bills = bills;
     }
 }
-*/

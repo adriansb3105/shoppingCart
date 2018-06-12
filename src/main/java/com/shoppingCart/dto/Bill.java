@@ -31,15 +31,14 @@ public class Bill implements Serializable{
     @JsonIgnore
 	private List<OrderDetail> orderDetails;
 
-	//@ManyToOne(fetch=FetchType.EAGER)
-	//@JoinColumn(name = "client_id")
-	//@JsonIgnore
-	//private Client client;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "client_id")
+	private Client client;
 
 	public Bill() {
 		this.billDate = new Date();
 		this.orderDetails = new ArrayList<OrderDetail>();
-		//this.client = new Client();
+		this.client = new Client();
 	}
 
 	public int getBillId() {
@@ -90,11 +89,11 @@ public class Bill implements Serializable{
 		this.deleted = deleted;
 	}
 
-	//public Client getClient() {
-	//	return client;
-	//}
+	public Client getClient() {
+		return client;
+	}
 
-	//public void setClient(Client client) {
-	//	this.client = client;
-	//}
+	public void setClient(Client client) {
+		this.client = client;
+	}
 }

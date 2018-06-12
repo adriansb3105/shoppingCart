@@ -25,9 +25,9 @@ public class ShoppingCart implements Serializable{
     @Column(name="deleted")
     private boolean deleted;
 
-	//@OneToOne(fetch = FetchType.LAZY)
-	//@JoinColumn(name = "client_id")
-	//private Client client;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	private Client client;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="Shopping_Cart_Product",
@@ -37,7 +37,7 @@ public class ShoppingCart implements Serializable{
 
 	public ShoppingCart() {
 		this.dateCreated = new Date();
-	//	this.client = new Client();
+		this.client = new Client();
 		this.products = new ArrayList<>();
 	}
 
@@ -65,13 +65,13 @@ public class ShoppingCart implements Serializable{
 		this.dateCreated = dateCreated;
 	}
 
-	//public Client getClient() {
-	//	return client;
-	//}
+	public Client getClient() {
+		return client;
+	}
 
-	//public void setClient(Client client) {
-	//	this.client = client;
-	//}
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
 	public List<Product> getProducts() {
 		return products;
