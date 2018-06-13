@@ -76,7 +76,7 @@ create table Order_Detail(	order_detail_id int IDENTITY(1, 1) not null constrain
 							constraint FK_Detail_Product Foreign Key(product_id) references Product(product_id)
 							on delete cascade on update cascade);
 
-create table Shopping_Cart_Product(	shopping_cart_id int IDENTITY(1, 1) not null,
+create table Shopping_Cart_Product(	shopping_cart_id int not null,
 									product_id int not null,
 									deleted bit not null default 0,
 									constraint PK_Cart_Product Primary Key(shopping_cart_id, product_id),
@@ -85,7 +85,7 @@ create table Shopping_Cart_Product(	shopping_cart_id int IDENTITY(1, 1) not null
 									constraint FK_Cart_Product_Product Foreign Key(product_id) references Product(product_id)
 									on delete cascade on update cascade);
 
-GO;
+
 
 ---------------------------------------------------------------------------------------
 CREATE PROCEDURE sp_login_employee @employee_code varchar(255), @email varchar(255), @password varchar(255)

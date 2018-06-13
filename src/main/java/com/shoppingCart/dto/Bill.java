@@ -3,9 +3,9 @@ package com.shoppingCart.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -29,7 +29,7 @@ public class Bill implements Serializable{
 
 	@OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnore
-	private List<OrderDetail> orderDetails;
+	private Set<OrderDetail> orderDetails;
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "client_id")
@@ -37,7 +37,7 @@ public class Bill implements Serializable{
 
 	public Bill() {
 		this.billDate = new Date();
-		this.orderDetails = new ArrayList<OrderDetail>();
+		this.orderDetails = new HashSet<OrderDetail>();
 		this.client = new Client();
 	}
 
@@ -73,11 +73,11 @@ public class Bill implements Serializable{
 		this.totalValue = totalValue;
 	}
 
-	public List<OrderDetail> getOrderDetails() {
+	public Set<OrderDetail> getOrderDetails() {
 		return orderDetails;
 	}
 
-	public void setOrderDetails(List<OrderDetail> orderDetails) {
+	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 

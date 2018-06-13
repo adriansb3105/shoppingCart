@@ -1,11 +1,11 @@
 package com.shoppingCart.dto;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name="Shopping_Cart")
@@ -25,7 +25,7 @@ public class ShoppingCart implements Serializable{
     @Column(name="deleted")
     private boolean deleted;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id")
 	private Client client;
 	
@@ -33,12 +33,13 @@ public class ShoppingCart implements Serializable{
 	@JoinTable(name="Shopping_Cart_Product",
 	joinColumns = {@JoinColumn(name="shopping_cart_id")},
 	inverseJoinColumns = {@JoinColumn(name="product_id")})
-	private List<Product> products;
+	private Set<Product> products;
+
 
 	public ShoppingCart() {
 		this.dateCreated = new Date();
 		this.client = new Client();
-		this.products = new ArrayList<>();
+		this.products = new HashSet<>();
 	}
 
 	public int getShoppingCartId() {
@@ -73,11 +74,11 @@ public class ShoppingCart implements Serializable{
 		this.client = client;
 	}
 
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
 

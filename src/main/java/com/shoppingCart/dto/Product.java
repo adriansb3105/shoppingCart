@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Product")
@@ -34,12 +34,17 @@ public class Product implements Serializable{
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JsonIgnore
-	private List<ProductImage> productImages;
+	private Set<ProductImage> productImages;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "products")
+	@JsonIgnore
+	private Set<ShoppingCart> shoppingCarts;
 
 	public Product() {
 		super();
 		this.category = new Category();
-		this.productImages = new ArrayList<ProductImage>();
+		this.productImages = new HashSet<ProductImage>();
+		this.shoppingCarts = new HashSet<ShoppingCart>();
 	}
 
 	public int getProductId() {
@@ -90,11 +95,19 @@ public class Product implements Serializable{
 		this.category = category;
 	}
 
-	public List<ProductImage> getProductImages() {
+	public Set<ProductImage> getProductImages() {
 		return productImages;
 	}
 
-	public void setProductImages(List<ProductImage> productImages) {
+	public void setProductImages(Set<ProductImage> productImages) {
 		this.productImages = productImages;
+	}
+
+	public Set<ShoppingCart> getShoppingCarts() {
+		return shoppingCarts;
+	}
+
+	public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
+		this.shoppingCarts = shoppingCarts;
 	}
 }

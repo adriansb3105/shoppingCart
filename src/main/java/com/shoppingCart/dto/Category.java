@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Category")
@@ -24,11 +24,11 @@ public class Category implements Serializable{
 
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JsonIgnore
-	private List<Product> products;
+	private Set<Product> products;
 
 	public Category() {
 		super();
-		this.products = new ArrayList<Product>();
+		this.products = new HashSet<Product>();
 	}
 
 	public int getCategoryId() {
@@ -55,11 +55,11 @@ public class Category implements Serializable{
 		this.deleted = deleted;
 	}
 
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
 }

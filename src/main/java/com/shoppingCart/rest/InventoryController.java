@@ -44,13 +44,13 @@ public class InventoryController {
         return new ResponseEntity<Inventory>(inventory, HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/buy", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> buyUnits(@PathVariable("quantity") final int quantity, @PathVariable("id") final int id){
         Boolean buyUnits = inventoryRepository.buyUnits(quantity, id);
         return new ResponseEntity<Boolean>(buyUnits, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> addUnits(@PathVariable("quantity") final int quantity, @PathVariable("id") final int id){
         Boolean addUnits = inventoryRepository.addUnits(quantity, id);
         return new ResponseEntity<Boolean>(addUnits, HttpStatus.ACCEPTED);
