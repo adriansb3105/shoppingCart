@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.shoppingCart.dto.ShoppingCart;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import javax.transaction.Transactional;
 
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Integer>{
 	List<ShoppingCart> findAll();
@@ -13,5 +16,7 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Inte
     ShoppingCart save(ShoppingCart shoppingCart);
 
     @Query(value = "update Shopping_Cart set deleted = 1 where shopping_cart_id = ?1", nativeQuery = true)
-    boolean delete(int id);
+    @Modifying
+    @Transactional
+    void delete(int id);
 }

@@ -34,9 +34,6 @@ create table Employee(	employee_id int IDENTITY(1, 1) not null constraint PK_Emp
 						departament varchar(255) not null,
 						deleted bit not null default 0);
 
-
-
-
 create table Client(	client_id int IDENTITY(1, 1) not null constraint PK_Client Primary Key,
 						email varchar(255) not null,
 						first_name varchar(255) not null,

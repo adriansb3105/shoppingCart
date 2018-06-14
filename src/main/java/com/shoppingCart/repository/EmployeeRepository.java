@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.shoppingCart.dto.Employee;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import javax.transaction.Transactional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	List<Employee> findAll();
@@ -17,5 +20,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	Employee login(String employee_code, String email, String password);
 
 	@Query(value = "update Employee set deleted = 1 where employee_id = ?1", nativeQuery = true)
-	boolean delete(int id);
+	@Modifying
+	@Transactional
+	void delete(int id);
 }
