@@ -2,6 +2,7 @@ package com.shoppingCart.rest;
 
 import java.util.List;
 
+import com.shoppingCart.dto.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,14 +46,14 @@ public class InventoryController {
     }
 
     @PostMapping(value = "/buy", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> buyUnits(@PathVariable("quantity") final int quantity, @PathVariable("id") final int id){
-        inventoryRepository.buyUnits(quantity, id);
+    public ResponseEntity<Boolean> buyUnits(@PathVariable("quantity") final int quantity, @RequestBody Product product){
+        inventoryRepository.buyUnits(quantity, product.getProductId());
         return new ResponseEntity<Boolean>(HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = "/add", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> addUnits(@PathVariable("quantity") final int quantity, @PathVariable("id") final int id){
-        inventoryRepository.addUnits(quantity, id);
+    public ResponseEntity<Boolean> addUnits(@PathVariable("quantity") final int quantity, @RequestBody Product product){
+        inventoryRepository.addUnits(quantity, product.getProductId());
         return new ResponseEntity<Boolean>(HttpStatus.ACCEPTED);
     }
 

@@ -36,13 +36,17 @@ public class Product implements Serializable{
 	@JsonIgnore
 	private Set<ProductImage> productImages;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "products")
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.ALL}, mappedBy = "products")
 	@JsonIgnore
 	private Set<ShoppingCart> shoppingCarts;
+
+	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Inventory inventory;
 
 	public Product() {
 		super();
 		this.category = new Category();
+		//this.inventory = new Inventory();
 		this.productImages = new HashSet<ProductImage>();
 		this.shoppingCarts = new HashSet<ShoppingCart>();
 	}
@@ -109,5 +113,13 @@ public class Product implements Serializable{
 
 	public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
 		this.shoppingCarts = shoppingCarts;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 }

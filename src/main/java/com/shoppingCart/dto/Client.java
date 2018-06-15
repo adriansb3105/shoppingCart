@@ -40,6 +40,9 @@ public class Client implements Serializable{
     @Column(name="description")
     private String description;
 
+    @Column(name="deleted")
+    private boolean deleted;
+
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     @JsonIgnore
     private ShoppingCart shoppingCart;
@@ -130,5 +133,29 @@ public class Client implements Serializable{
 
     public void setBills(Set<Bill> bills) {
         this.bills = bills;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 }

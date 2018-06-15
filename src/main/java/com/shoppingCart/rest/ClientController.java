@@ -25,7 +25,7 @@ public class ClientController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Client> findClientById(int id){
+	public ResponseEntity<Client> findClientById(@PathVariable("id") final int id){
 		Client client = clientRepository.findById(id);
 		return new ResponseEntity<Client>(client, HttpStatus.OK);
 	}
@@ -37,7 +37,8 @@ public class ClientController {
 	}
 
 	@GetMapping("login_user/{email}/{password}")
-	public ResponseEntity<Client> login(String email, String password){
+	public ResponseEntity<Client> login(@PathVariable("email") final String email,
+										@PathVariable("password") final String password){
 		Client client = clientRepository.login(email, password);
 		return new ResponseEntity<Client>(client, HttpStatus.OK);
 	}

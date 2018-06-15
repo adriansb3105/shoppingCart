@@ -15,7 +15,7 @@ public class Inventory implements Serializable{
 	@Column(name="units")
 	private int units;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
     private Product product;
 
