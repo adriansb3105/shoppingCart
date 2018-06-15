@@ -1,5 +1,7 @@
 package com.shoppingCart.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,6 +27,7 @@ public class ProductImage  implements Serializable {
 
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name = "product_id")
+	@JsonIgnore
     private Product product;
 
 	@Column(name="deleted")

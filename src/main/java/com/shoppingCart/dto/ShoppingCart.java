@@ -1,5 +1,7 @@
 package com.shoppingCart.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,17 +31,17 @@ public class ShoppingCart implements Serializable{
 	@JoinColumn(name = "client_id")
 	private Client client;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="Shopping_Cart_Product",
-	joinColumns = {@JoinColumn(name="shopping_cart_id")},
-	inverseJoinColumns = {@JoinColumn(name="product_id")})
-	private Set<Product> products;
-
+	//@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	//@JoinTable(name="Shopping_Cart_Product",
+	//joinColumns = {@JoinColumn(name="shopping_cart_id")},
+	//inverseJoinColumns = {@JoinColumn(name="product_id")})
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "product_id")
+	private Product product;
 
 	public ShoppingCart() {
 		this.dateCreated = new Date();
 		this.client = new Client();
-		this.products = new HashSet<>();
 	}
 
 	public int getShoppingCartId() {
@@ -74,15 +76,15 @@ public class ShoppingCart implements Serializable{
 		this.client = client;
 	}
 
-	public Set<Product> getProducts() {
-		return products;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-    public boolean isDeleted() {
+	public boolean isDeleted() {
         return deleted;
     }
 

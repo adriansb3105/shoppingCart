@@ -28,6 +28,7 @@ public class ProductController {
                 products.remove(p);
             }
         }
+
 		return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
 	}
 

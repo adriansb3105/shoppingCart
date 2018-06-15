@@ -33,22 +33,21 @@ public class Product implements Serializable{
 	private Category category;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JsonIgnore
 	private Set<ProductImage> productImages;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.ALL}, mappedBy = "products")
-	@JsonIgnore
-	private Set<ShoppingCart> shoppingCarts;
+	//@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.ALL}, mappedBy = "products")
+	//@JsonIgnore
+	//private Set<ShoppingCart> shoppingCarts;
 
-	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Inventory inventory;
+	//@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//private Inventory inventory;
 
 	public Product() {
 		super();
 		this.category = new Category();
 		//this.inventory = new Inventory();
 		this.productImages = new HashSet<ProductImage>();
-		this.shoppingCarts = new HashSet<ShoppingCart>();
+	//	this.shoppingCarts = new HashSet<ShoppingCart>();
 	}
 
 	public int getProductId() {
@@ -107,19 +106,19 @@ public class Product implements Serializable{
 		this.productImages = productImages;
 	}
 
-	public Set<ShoppingCart> getShoppingCarts() {
-		return shoppingCarts;
-	}
+	//public Set<ShoppingCart> getShoppingCarts() {
+	//	return shoppingCarts;
+	//}
 
-	public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
-		this.shoppingCarts = shoppingCarts;
-	}
+	//public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
+	//	this.shoppingCarts = shoppingCarts;
+	//}
 
-	public Inventory getInventory() {
-		return inventory;
-	}
+	//public Inventory getInventory() {
+	//	return inventory;
+	//}
 
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
-	}
+	//public void setInventory(Inventory inventory) {
+	//	this.inventory = inventory;
+	//}
 }
