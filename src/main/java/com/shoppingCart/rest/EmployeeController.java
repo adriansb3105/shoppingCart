@@ -50,11 +50,9 @@ public class EmployeeController {
         return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
     }
 
-	@GetMapping("login_employee/{employee_code}/{email}/{password}")
-	public ResponseEntity<Employee> login(@PathVariable("employee_code") final String employee_code,
-                                          @PathVariable("email") final String email,
-                                          @PathVariable("password") final String password){
-		Employee employee = employeeRepository.login(employee_code, email, password);
+	@PostMapping("/login_employee")
+	public ResponseEntity<Employee> login(@RequestBody Employee e){
+		Employee employee = employeeRepository.login(e.getEmployeeCode(), e.getEmail(), e.getPassword());
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.shoppingCart.dto.Client;
@@ -17,7 +18,12 @@ public class ClientController {
 
 	@Autowired
 	private ClientRepository clientRepository;
-	
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	public ClientController(BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
+
 	@GetMapping("/")
 	public ResponseEntity<List<Client>> listAllClients(){
 		List<Client> clients = clientRepository.findAll();
@@ -30,16 +36,15 @@ public class ClientController {
 		return new ResponseEntity<Client>(client, HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Client> createClient(@RequestBody final Client client){
-		clientRepository.save(client);
-		return new ResponseEntity<Client>(client, HttpStatus.CREATED);
+	@GetMapping("/login_user/{email}")
+	public ResponseEntity<Client> login(@PathVariable("email") final String email){
+		Client client = clientRepository.login(email);
+		return new ResponseEntity<Client>(client, HttpStatus.OK);
 	}
 
-	@GetMapping("login_user/{email}/{password}")
-	public ResponseEntity<Client> login(@PathVariable("email") final String email,
-										@PathVariable("password") final String password){
-		Client client = clientRepository.login(email, password);
-		return new ResponseEntity<Client>(client, HttpStatus.OK);
+	@PostMapping("/sign-up")
+	public void signUp(@RequestBody Client client) {
+		client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
+		clientRepository.save(client);
 	}
 }

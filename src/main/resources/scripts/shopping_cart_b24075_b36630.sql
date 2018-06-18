@@ -93,15 +93,15 @@ END
 GO;
 ---------------------------------------------------------------------------------------
 
-CREATE PROCEDURE sp_login_client @email varchar(255), @password varchar(255)
+Create PROCEDURE sp_login_client @email varchar(255)
 AS
 BEGIN
-	select client_id, email, first_name, last_name, password, city, postal_code, telephone, description from Client where email=@email AND password=@password;
+	select client_id, email, first_name, last_name, password, city, postal_code, telephone, description, deleted from Client where email=@email;
 END
-GO;
+
 ---------------------------------------------------------------------------------------
 
 
 -- exec sp_login_employee '','','';
--- exec sp_login_client '','';
+exec sp_login_client 'a@b.c';
 -- drop procedure sp_login_employee;
