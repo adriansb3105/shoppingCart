@@ -44,15 +44,15 @@ public class EmployeeController {
         return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
     }
 
+    @PostMapping(value = "/login", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Employee> login(@RequestBody Employee employee){
+        Employee e = this.employeeRepository.login(employee.getEmployeeCode(), employee.getEmail(), employee.getPassword());
+        return new ResponseEntity<Employee>(e, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") final int id){
         employeeRepository.delete(id);
         return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
     }
-
-	@PostMapping("/login_employee")
-	public ResponseEntity<Employee> login(@RequestBody Employee e){
-		Employee employee = employeeRepository.login(e.getEmployeeCode(), e.getEmail(), e.getPassword());
-		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
-	}
 }

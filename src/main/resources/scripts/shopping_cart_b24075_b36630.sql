@@ -85,18 +85,18 @@ create table Shopping_Cart_Product(	shopping_cart_id int not null,
 
 
 ---------------------------------------------------------------------------------------
-CREATE PROCEDURE sp_login_employee @employee_code varchar(255), @email varchar(255), @password varchar(255)
+Create PROCEDURE sp_login_employee @employee_code varchar(255), @email varchar(255), @password varchar(255)
 AS
 BEGIN
-	select employee_id, email, first_name, last_name, password, employee_code, departament from Employee where employee_code=@employee_code AND email=@email AND password=@password ;
+	select employee_id, email, first_name, last_name, password, employee_code, departament, deleted from Employee where employee_code=@employee_code AND email=@email AND password=@password ;
 END
-GO;
+
 ---------------------------------------------------------------------------------------
 
-Create PROCEDURE sp_login_client @email varchar(255)
+Create PROCEDURE sp_login_client @email varchar(255), @password varchar(255)
 AS
 BEGIN
-	select client_id, email, first_name, last_name, password, city, postal_code, telephone, description, deleted from Client where email=@email;
+	select client_id, email, first_name, last_name, password, city, postal_code, telephone, description, deleted from Client where email=@email AND password=@password;
 END
 
 ---------------------------------------------------------------------------------------

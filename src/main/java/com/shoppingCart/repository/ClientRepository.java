@@ -12,8 +12,8 @@ public interface ClientRepository extends JpaRepository<Client, Integer>{
 	Client save(Client client);
 	Client findById(int id);
 
-	@Query(value = "sp_login_client ?1", nativeQuery = true)
-	Client login(String email);
+	@Query(value = "sp_login_client ?1, ?2", nativeQuery = true)
+	Client login(String email, String password);
 
 	//@Query(value = "select * from Client where email = ?1", nativeQuery = true)
 	//Client findByEmail(String email);
