@@ -47,6 +47,8 @@ public class ProductController {
         return new ResponseEntity<Product>(product, HttpStatus.CREATED);
     }
 
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") final int id){
         productRepository.delete(id);
