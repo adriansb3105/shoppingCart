@@ -27,7 +27,6 @@ public class ProductImage  implements Serializable {
 
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name = "product_id")
-	@JsonIgnore
     private Product product;
 
 	@Column(name="deleted")

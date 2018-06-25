@@ -32,8 +32,8 @@ public class Product implements Serializable{
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	private Set<ProductImage> productImages;
+	//@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	//private Set<ProductImage> productImages;
 
 	//@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.ALL}, mappedBy = "products")
 	//@JsonIgnore
@@ -46,7 +46,7 @@ public class Product implements Serializable{
 		super();
 		this.category = new Category();
 		//this.inventory = new Inventory();
-		this.productImages = new HashSet<ProductImage>();
+	//	this.productImages = new HashSet<ProductImage>();
 	//	this.shoppingCarts = new HashSet<ShoppingCart>();
 	}
 
@@ -98,13 +98,13 @@ public class Product implements Serializable{
 		this.category = category;
 	}
 
-	public Set<ProductImage> getProductImages() {
-		return productImages;
-	}
+	//public Set<ProductImage> getProductImages() {
+	//	return productImages;
+	//}
 
-	public void setProductImages(Set<ProductImage> productImages) {
-		this.productImages = productImages;
-	}
+	//public void setProductImages(Set<ProductImage> productImages) {
+	//	this.productImages = productImages;
+	//}
 
 	//public Set<ShoppingCart> getShoppingCarts() {
 	//	return shoppingCarts;
